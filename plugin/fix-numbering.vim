@@ -49,9 +49,6 @@ function! s:SetValue(lineno, pos, value)
 endfunction
 
 function! s:FixNumbering(column_no)
-    let l:old_nrformats = &nrformats
-    set nrformats=
-
     let l:lno = line('.')
 
     let l:pline = getline(l:lno - 1)
@@ -67,8 +64,6 @@ function! s:FixNumbering(column_no)
         return
     endif
     call s:SetValue(l:lno, l:cpos, l:pvalue + 1)
-
-    let &nrformats=l:old_nrformats
 endfunction
 
 command! -nargs=1 -range FixNumbering :<line1>,<line2>call <SID>FixNumbering(<f-args>)
