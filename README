@@ -1,0 +1,62 @@
+https://github.com/taku-o/vim-fix-numbering
+
+fix numbering.
+
+------------------------------------------------------------
+Command
+    :[range]FixNumbering {number_index}
+
+
+------------------------------------------------------------
+Command Example.
+
+    1. sample data is this.
+
+        515 Allegra Gilbert 747 Sibelius 123 484 140
+        764 Violet Elliott 935 Altavista 721 830 785
+        979 Yoshi Noel 750 Lavasoft 542 636 567
+        715 Portia Battle 918 Adobe 590 394 760
+        845 Kimberly Watson 143 Chami 180 468 346
+        829 Lael Dickson 560 Cakewalk 825 929 964
+        870 Sierra Decker 690 Apple Systems 565 629 142
+        588 Ursa Gonzales 173 Macromedia 744 408 708
+        840 Phoebe Wong 521 Lycos 579 771 610
+        137 Fatima Wade 468 Cakewalk 474 154 115
+        515 Ariana Stuart 485 Sibelius 491 920 643
+        459 Sage Bradshaw 198 Adobe 960 324 545
+
+    2. execute 'FixNumbering' command.
+
+        :%FixNumbering 4
+
+    3. command result is this.
+       numbering is fixed.
+
+        515 Allegra Gilbert 747 Sibelius 123 484 140
+        764 Violet Elliott 935 Altavista 721 485 785
+        979 Yoshi Noel 750 Lavasoft 542 486 567
+        715 Portia Battle 918 Adobe 590 487 760
+        845 Kimberly Watson 143 Chami 180 488 346
+        829 Lael Dickson 560 Cakewalk 825 489 964
+        870 Sierra Decker 690 Apple Systems 565 490 142
+        588 Ursa Gonzales 173 Macromedia 744 491 708
+        840 Phoebe Wong 521 Lycos 579 492 610
+        137 Fatima Wade 468 Cakewalk 474 493 115
+        515 Ariana Stuart 485 Sibelius 491 494 643
+        459 Sage Bradshaw 198 Adobe 960 495 545
+
+                                             484
+                                             485
+                                        486
+                                        487
+                                          488
+                                          489
+                                                490
+                                             491
+                                      492
+                                         493
+                                           494
+                                        495
+
+
+
