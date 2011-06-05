@@ -48,25 +48,31 @@ function! s:SetValue(lineno, pos, value)
     call setline(a:lineno, l:t. a:value. l:l)
 endfunction
 
-function! s:FixNumbering(column_no)
+function! s:FixNumbering(...)
+    if len(a:000) > 0
+        let l:column_no = str2nr(a:000[0])
+    else
+        let l:column_no = 1
+    endif
+
     let l:lno = line('.')
 
     let l:pline = getline(l:lno - 1)
-    let l:ppos = s:FindValue(l:pline, a:column_no)
+    let l:ppos = s:FindValue(l:pline, l:column_no)
     if len(l:ppos) < 2
         return
     endif
     let l:pvalue = s:GetValue(l:lno - 1, l:ppos)
 
     let l:cline = getline('.')
-    let l:cpos = s:FindValue(l:cline, a:column_no)
+    let l:cpos = s:FindValue(l:cline, l:column_no)
     if len(l:cpos) < 2
         return
     endif
     call s:SetValue(l:lno, l:cpos, l:pvalue + 1)
 endfunction
 
-command! -nargs=1 -range FixNumbering :<line1>,<line2>call <SID>FixNumbering(<f-args>)
+command! -nargs=? -range FixNumbering :<line1>,<line2>call <SID>FixNumbering(<f-args>)
 
 " ---------------------------------------------------------------------
 let &cpo= s:keepcpo
