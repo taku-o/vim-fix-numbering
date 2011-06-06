@@ -25,7 +25,7 @@ function! s:FindValue(line, no)
         let l:l += 1
     endwhile
 
-    return [ l:s, l:e]
+    return [ l:s, l:e ]
 endfunction
 
 function! s:GetValue(lineno, pos)
@@ -34,7 +34,7 @@ function! s:GetValue(lineno, pos)
     endif
 
     let l:line = getline(a:lineno)
-    return strpart(l:line, a:pos[0] , a:pos[1] - a:pos[0])
+    return str2nr(strpart(l:line, a:pos[0] , a:pos[1] - a:pos[0]))
 endfunction
 
 function! s:SetValue(lineno, pos, value)
@@ -69,7 +69,10 @@ function! s:FixNumbering(...)
     if len(l:cpos) < 2
         return
     endif
-    call s:SetValue(l:lno, l:cpos, l:pvalue + 1)
+
+    let l:nvalue = l:pvalue + 1
+    let l:format = '%0'. (l:ppos[1] - l:ppos[0]). 'd'
+    call s:SetValue(l:lno, l:cpos, printf(l:format, l:nvalue))
 endfunction
 
 command! -nargs=? -range FixNumbering :<line1>,<line2>call <SID>FixNumbering(<f-args>)
